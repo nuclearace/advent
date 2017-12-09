@@ -1,5 +1,7 @@
 import Foundation
 
+// http://adventofcode.com/2017/day/5
+
 func solveJumpMaze(_ maze: [Int]) -> Int {
     var maze = maze
     var ip = 0

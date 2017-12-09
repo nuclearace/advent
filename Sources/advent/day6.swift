@@ -1,5 +1,7 @@
 import Foundation
 
+// http://adventofcode.com/2017/day/6
+
 func reallocateMemory(_ banks: [Int]) -> Int {
     var previousConfigurations = Set<Int>()
     var banks = banks

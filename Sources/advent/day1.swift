@@ -1,3 +1,5 @@
+// http://adventofcode.com/2017/day/1
+
 func solveCaptcha(_ input: String) -> Int {
     guard input != "" else { return 0 }
 

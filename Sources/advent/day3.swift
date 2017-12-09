@@ -1,5 +1,7 @@
 import Foundation
 
+// http://adventofcode.com/2017/day/3
+
 func getDistance(from num: Int) -> Int {
     let nearestRoot = Int(pow(Double(num), 0.5))
     let shellSize = nearestRoot % 2 == 0 ? nearestRoot + 1 : nearestRoot + 2
