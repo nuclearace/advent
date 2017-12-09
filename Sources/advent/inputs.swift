@@ -1596,3 +1596,7 @@ let day5Input = """
                 -458
                 -705
                 """.components(separatedBy: "\n").map({ Int($0)! })
+
+let day6Input = """
+                4	10	4	1	8	4	9	14	5	1	14	15	0	15	3	5
+                """.components(separatedBy: "\t").map({ Int($0)! })
