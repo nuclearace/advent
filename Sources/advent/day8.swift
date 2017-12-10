@@ -5,8 +5,9 @@ private let regex = try! Regex(string: "([a-z]{1,3}) (inc|dec) (-?\\d{1,500}) if
 
 // http://adventofcode.com/2017/day/8
 
-func largestRegisterValue(afterExecuting instructions: [String]) -> Int {
+func largestRegisterValue(afterExecuting instructions: [String], partTwo: Bool = false) -> Int {
     var registers = [String: Int]()
+    var highest = 0
 
     for instruction in instructions {
         guard let match = regex.firstMatch(in: instruction),
@@ -20,9 +21,13 @@ func largestRegisterValue(afterExecuting instructions: [String]) -> Int {
         guard cond.apply(lhs: registers[condReg] ?? 0, rhs: condValue) else { continue }
 
         registers[reg] = ins.apply(lhs: registers[reg] ?? 0, rhs: value)
+
+        if registers[reg]! > highest {
+            highest = registers[reg]!
+        }
     }
 
-    return registers.values.max()!
+    return partTwo ? highest : registers.values.max()!
 }
 
 private enum Comparison : String {
