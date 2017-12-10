@@ -14,24 +14,12 @@ func reallocateMemory(_ banks: [Int], partTwo: Bool = false) -> Int {
         previousConfigurations.insert(oldHash)
         previousConfigLocs.append(oldHash)
 
-        redistributeMemory(banks: &banks, fromBank: bankWithHighestUtilization(banks: banks))
+        redistributeMemory(banks: &banks, fromBank: banks.index(of: banks.max()!)!)
 
         distributions += 1
     } while !previousConfigurations.contains(createBankHash(banks: banks))
 
     return partTwo ? previousConfigLocs.count - previousConfigLocs.index(of: createBankHash(banks: banks))! : distributions
-}
-
-private func bankWithHighestUtilization(banks: [Int]) -> Int {
-    var highest = banks[0]
-    var highestBank = 0
-
-    for bank in 0..<banks.count where banks[bank] > highest {
-        highest = banks[bank]
-        highestBank = bank
-    }
-
-    return highestBank
 }
 
 private func createBankHash(banks: [Int]) -> Int {
@@ -47,11 +35,7 @@ private func redistributeMemory(banks: inout [Int], fromBank bank: Int) {
     banks[bank] = 0
 
     for _ in 0..<numToDistribute {
-        if distributeTo == banks.count {
-            distributeTo = 0
-        }
-
-        banks[distributeTo] += 1
+        banks[distributeTo % banks.count] += 1
         distributeTo += 1
     }
 }
