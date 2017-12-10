@@ -6,4 +6,4 @@ print("Day 5: ", solveJumpMaze(day5Input))
 print("Day 6: ", reallocateMemory(day6Input))
 print("Day 7: ", findRootProgram(day7Input))
 print("Day 8: ", largestRegisterValue(afterExecuting: day8Input))
-
+print("Day 9: ", calculateScore(day9Input))
