@@ -84,9 +84,9 @@ private class Node : CustomStringConvertible, Hashable {
         }
 
         let nodeCounts = root.children.map({ ($0, $0.sum()) })
-                                    .reduce(into: NodeCounter(), {(minMap: inout NodeCounter, nodeCount: NodeCount) in
-                                        minMap[nodeCount.1, default: (nodeCount.0, 0)].count += 1
-                                    })
+                                      .reduce(into: NodeCounter(), {(minMap: inout NodeCounter, nodeCount: NodeCount) in
+                                          minMap[nodeCount.1, default: (nodeCount.0, 0)].count += 1
+                                      })
         let min = nodeCounts.first(where: { $1.count == 1 })?.value.node
 
         if min == nil {
