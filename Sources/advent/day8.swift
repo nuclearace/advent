@@ -1,7 +1,7 @@
 import Foundation
 import Regex
 
-private let regex = try! Regex(string: "([a-z]{1,3}) (inc|dec) (-?\\d{1,500}) if ([a-z]{1,3}) (>|<|==|!=|<=|>=) (-?\\d{1,500})")
+private let regex = try! Regex(string: "([a-z]{1,3}) (inc|dec) (-?\\d{1,19}) if ([a-z]{1,3}) (>|<|==|!=|<=|>=) (-?\\d{1,19})")
 
 // http://adventofcode.com/2017/day/8
 
