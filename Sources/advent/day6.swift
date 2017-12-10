@@ -2,18 +2,24 @@ import Foundation
 
 // http://adventofcode.com/2017/day/6
 
-func reallocateMemory(_ banks: [Int]) -> Int {
+func reallocateMemory(_ banks: [Int], partTwo: Bool = false) -> Int {
     var previousConfigurations = Set<Int>()
+    var previousConfigLocs = [Int]()
     var banks = banks
     var distributions = 0
 
     repeat {
-        previousConfigurations.insert(createBankHash(banks: banks))
+        let oldHash = createBankHash(banks: banks)
+
+        previousConfigurations.insert(oldHash)
+        previousConfigLocs.append(oldHash)
+
         redistributeMemory(banks: &banks, fromBank: bankWithHighestUtilization(banks: banks))
+
         distributions += 1
     } while !previousConfigurations.contains(createBankHash(banks: banks))
 
-    return distributions
+    return partTwo ? previousConfigLocs.count - previousConfigLocs.index(of: createBankHash(banks: banks))! : distributions
 }
 
 private func bankWithHighestUtilization(banks: [Int]) -> Int {
