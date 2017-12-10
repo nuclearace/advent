@@ -1,5 +1,7 @@
-print("Day 1: ", solveCaptcha(day1Input, partTwo: true))
-print("Day 2: ", checksum(day2Input))
+let partTwo = true
+
+print("Day 1: ", solveCaptcha(day1Input, partTwo: partTwo))
+print("Day 2: ", checksum(day2Input, partTwo: partTwo))
 print("Day 3: ", getDistance(from: day3Input))
 print("Day 4: ", getValidPassphraseCount(day4Input))
 print("Day 5: ", solveJumpMaze(day5Input))
