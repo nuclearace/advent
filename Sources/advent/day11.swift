@@ -1,5 +1,7 @@
 import Foundation
 
+// http://adventofcode.com/2017/day/11
+
 func getHexDistance(_ input: String, partTwo: Bool = false) -> Int {
     var (x, y, z) = (0, 0, 0)
     var dists = [Int]()
