@@ -5,13 +5,14 @@ import Foundation
 func findRootGroupCount(_ input: [[String]], partTwo: Bool = false) -> Int {
     let network = createNetwork(input)
     var seen = Set<Int>()
-    
+
     let connectedCount = countConnected(network: network, node: 0, seen: &seen)
 
     if partTwo {
         let groups = network.reduce(into: Set<Set<Int>>(), {groups, keyValue in
             var group = Set<Int>()
-            groups.insert(connectGroup(network: network, node: keyValue.key, seen: &group))
+            connectGroup(network: network, node: keyValue.key, group: &group)
+            groups.insert(group)
         })
 
         print("Number of groups:", groups.count)
@@ -45,14 +46,12 @@ private func countConnected(network: [Int: Set<Int>], node: Int, seen: inout Set
     return 1 + network[node]!.map({ countConnected(network: network, node: $0, seen: &seen) }).reduce(0, +)
 }
 
-private func connectGroup(network: [Int: Set<Int>], node: Int, seen: inout Set<Int>) -> Set<Int> {
-    guard !seen.contains(node) else { return seen }
+private func connectGroup(network: [Int: Set<Int>], node: Int, group: inout Set<Int>) {
+    guard !group.contains(node) else { return }
 
-    seen.insert(node)
+    group.insert(node)
 
     network[node]!.forEach({child in
-        _ = connectGroup(network: network, node: child, seen: &seen)
+        connectGroup(network: network, node: child, group: &group)
     })
-
-    return seen
 }
