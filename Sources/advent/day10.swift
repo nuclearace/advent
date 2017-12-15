@@ -8,7 +8,7 @@ func knotHash(_ input: String) -> String {
     let inputArray = input.map({ Int($0.unicodeScalars.first!.value) }) + suffix
     let hashArray = twist(inputArray)
 
-    return hashArray.chunks(16).map({ $0.reduce(0, ^) }).map({ String($0, radix: 16) }).reduce("", +)
+    return hashArray.chunks(16).map({ $0.reduce(0, ^) }).map({ pad(String($0, radix: 16), to: 2) }).reduce("", +)
 }
 
 func twist(_ input: [Int], rounds: Int = 64) -> [Int] {

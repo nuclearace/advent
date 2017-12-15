@@ -1,8 +1,6 @@
-//
-// Created by Erik Little on 12/14/17.
-//
-
 import Foundation
+
+// http://adventofcode.com/2017/day/13
 
 func findSeverity(_ input: [[Int]], partTwo: Bool = false) -> Int {
     var firewall = [Int: Int]()
@@ -17,13 +15,15 @@ func findSeverity(_ input: [[Int]], partTwo: Bool = false) -> Int {
         severity += pos * height
     }
 
-    waiting: for wait in 0..<Int.max {
-        for (pos, height) in firewall where scan(height: height, time: wait + pos) == 0 {
-            continue waiting
-        }
+    if partTwo {
+        waiting: for wait in 0..<Int.max {
+            for (pos, height) in firewall where scan(height: height, time: wait + pos) == 0 {
+                continue waiting
+            }
 
-        delayCount = wait
-        break
+            delayCount = wait
+            break
+        }
     }
 
     return partTwo ? delayCount : severity
