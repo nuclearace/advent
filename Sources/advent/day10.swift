@@ -36,27 +36,3 @@ func twist(_ input: [Int], rounds: Int = 64) -> [Int] {
 
     return knot
 }
-
-private extension Array {
-    func chunks(_ chunkSize: Int) -> [[Element]] {
-        return stride(from: 0, to: self.count, by: chunkSize).map {
-            Array(self[$0..<Swift.min($0 + chunkSize, self.count)])
-        }
-    }
-
-    func shifted(amount: Int) -> [Element] {
-        guard amount != 0 else { return self }
-
-        var amount = amount
-
-        if amount < 0 {
-            amount += count
-        }
-
-        return Array(self[amount..<count] + self[0..<amount])
-    }
-
-    mutating func shift(amount: Int) {
-        self = shifted(amount: amount)
-    }
-}
