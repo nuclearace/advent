@@ -6085,3 +6085,5 @@ let day13Input = """
                 """.components(separatedBy: "\n").map({ $0.components(separatedBy: ": ").map({ Int($0)! }) })
 
 let day14Input = "wenycdww"
+
+let day15Input = (289, 629)
