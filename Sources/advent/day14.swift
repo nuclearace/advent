@@ -8,18 +8,12 @@ func countSquaresUsed(_ input: String, partTwo: Bool = false) -> Int {
     let grid = (0..<128).map({i -> [Int] in
         let hash = Array(knotHash("\(input)-\(i)"))
 
-        let b = stride(from: 0, to: hash.count, by: 2).map({i -> [Int] in
-            let paddedUp = pad(String(Int(hash[i..<min(i + 2, hash.count)].map(String.init).reduce("", +),
+        return stride(from: 0, to: hash.count, by: 2).map({i -> [Int] in
+            return pad(String(Int(hash[i..<min(i + 2, hash.count)].map(String.init).reduce("", +),
                                   radix: 16)!,
                               radix: 2),
-                       to: 8)
-            let counts = paddedUp.map({ Int(String($0))! })
-            return counts
-        })
-
-        let flat = b.flatMap({ $0 })
-
-        return flat
+                       to: 8).map({ Int(String($0))! })
+        }).flatMap({ $0 })
     })
 
     if partTwo {
