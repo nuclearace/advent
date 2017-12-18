@@ -25,7 +25,13 @@ func findFrequency(_ input: [String], partTwo: Bool = false) -> Int {
 
         while true {
             lock.wait()
-            guard !deadlock else { break }
+
+            guard !deadlock else {
+                lock.signal()
+
+                break
+            }
+
             lock.signal()
         }
 
@@ -186,6 +192,7 @@ private class Program : Duet {
 
             if waiting && partner.waiting {
                 deadlock = true
+                ip = input.count
                 lock.signal()
 
                 return
