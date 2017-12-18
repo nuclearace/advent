@@ -15,3 +15,6 @@ print("Day 14:", countSquaresUsed(day14Input))
 print("Day 15:", generatorBattle(seeds: day15Input))
 print("Day 16:", getFinalPositions(day16Input))
 print("Day 17:", spinlock(stepping: day17Input))
+if #available(OSX 10.12, *) {
+    print("Day 18:", findFrequency(day18Input))
+}
