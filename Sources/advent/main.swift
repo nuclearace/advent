@@ -18,3 +18,4 @@ print("Day 17:", spinlock(stepping: day17Input))
 if #available(OSX 10.12, *) {
     print("Day 18:", findFrequency(day18Input))
 }
+print("Day 19:", findPath(day19Input))
