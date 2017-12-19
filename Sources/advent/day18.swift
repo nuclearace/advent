@@ -46,14 +46,14 @@ private class Duet {
 
     fileprivate var ip = 0
     fileprivate var regs = [String: Int]()
-    fileprivate var lastSound = 0
-    fileprivate var recoveredSound = 0
+    private var lastSound = 0
+    private var recoveredSound = 0
 
     init(input: [String]) {
         self.input = input
     }
 
-    fileprivate func doMath(reg: String, arg: String, op: (Int, Int) -> Int) {
+    private func doMath(reg: String, arg: String, op: (Int, Int) -> Int) {
         let current = regs[reg, default: 0]
 
         if let literal = Int(arg) {
@@ -63,7 +63,7 @@ private class Duet {
         }
     }
 
-    fileprivate func jumpGreaterThanZero(arg: String, offset: String) {
+    private func jumpGreaterThanZero(arg: String, offset: String) {
         let jmpVal: Int
 
         if let literal = Int(arg) {
@@ -143,7 +143,7 @@ private class Duet {
         return recoveredSound
     }
 
-    fileprivate func setRegister(reg: String, arg: String) {
+    private func setRegister(reg: String, arg: String) {
         if let literal = Int(arg) {
             regs[reg] = literal
         } else {
