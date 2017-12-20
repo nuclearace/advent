@@ -31,14 +31,6 @@ func findPath(_ input: [[String]], partTwo: Bool = false) -> String {
 
         if curChar == "+" {
             switch direction {
-            case .up where curColumn == 0,
-                 .down where curColumn == 0:
-                // Against left wall, go right
-                direction = .right
-            case .up where curColumn == input[0].count-1,
-                 .down where curColumn == input[0].count-1:
-                // Against right wall, go left
-                direction = .left
             case .up where !["|", " "].contains(input[curRow][curColumn+1]),
                  .down where !["|", " "].contains(input[curRow][curColumn+1]):
                 // Go right
@@ -47,14 +39,6 @@ func findPath(_ input: [[String]], partTwo: Bool = false) -> String {
                  .down where !["|", " "].contains(input[curRow][curColumn-1]):
                 // Go left
                 direction = .left
-            case .left where curRow == 1,
-                 .right where curRow == 1:
-                // Against top wall, go down
-                direction = .down
-            case .left where curColumn == input.count-1,
-                 .right where curColumn == input.count-1:
-                // Against bottom wall, go up
-                direction = .up
             case .left where !["-", " "].contains(input[curRow+1][curColumn]),
                  .right where !["-", " "].contains(input[curRow+1][curColumn]):
                 // Go down
