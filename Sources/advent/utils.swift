@@ -22,6 +22,16 @@ extension Array {
     }
 }
 
+func ==(lhs: [[String]], rhs: [[String]]) -> Bool {
+    guard lhs.count == rhs.count else { return false }
+
+    for i in 0..<lhs.count where lhs[i] != rhs[i] {
+        return false
+    }
+
+    return true
+}
+
 func pad(_ string: String, to: Int) -> String {
     var padded = string
 

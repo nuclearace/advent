@@ -20,3 +20,4 @@ if #available(OSX 10.12, *) {
 }
 print("Day 19:", findPath(day19Input))
 print("Day 20:", simulateParticles(day20Input))
+print("Day 21:", fractalImage(day21Input))

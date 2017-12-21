@@ -1,6 +1,6 @@
 import Foundation
 
-// http://adventofcode.com/2017/day/19
+// http://adventofcode.com/2017/day/20
 
 func simulateParticles(_ input: [String], partTwo: Bool = false) -> Int {
     var particles = [Particle]()
