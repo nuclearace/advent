@@ -4,20 +4,20 @@ import Foundation
 
 func fractalImage(_ input: [String], partTwo: Bool = false) -> Int {
     var image = [
-        [".", "#", "."],
-        [".", ".", "#"],
-        ["#", "#", "#"]
+        [false, true, false],
+        [false, false, true],
+        [true, true, true]
     ]
 
     var enhancements = [Enhancement]()
 
     for enhancement in input {
         let splitEnhancement = enhancement.components(separatedBy: " => ")
-        let input = splitEnhancement[0].components(separatedBy: "/").map(Array.init)
-        let output = splitEnhancement[1].components(separatedBy: "/").map({ $0.map(String.init) })
+        let input = splitEnhancement[0].components(separatedBy: "/").map({ $0.map({ $0 == "#" }) })
+        let output = splitEnhancement[1].components(separatedBy: "/").map({ $0.map({ $0 == "#" }) })
         let numInput = input.count
 
-        func newCord(r: Int, c: Int, flipped: Bool, reverseR: Bool, reverseC: Bool) -> String {
+        func newCord(r: Int, c: Int, flipped: Bool, reverseR: Bool, reverseC: Bool) -> Bool {
             var matchR = r
             var matchC = c
 
@@ -33,7 +33,7 @@ func fractalImage(_ input: [String], partTwo: Bool = false) -> Int {
                 (matchC, matchR) = (matchR, matchC)
             }
 
-            return String(input[matchR][matchC])
+            return input[matchR][matchC]
         }
 
         for flipped in [true, false] {
@@ -54,11 +54,11 @@ func fractalImage(_ input: [String], partTwo: Bool = false) -> Int {
         let blockSize = numRows % 2 == 0 ? 2 : 3
         let innerBlockSize = numRows / blockSize
         let newSize = numRows / blockSize * (blockSize + 1)
-        let newImage = (0..<innerBlockSize).map({i -> [[[String]]] in
-            return (0..<innerBlockSize).map({x -> [[String]] in
+        let newImage = (0..<innerBlockSize).map({i -> [[[Bool]]] in
+            return (0..<innerBlockSize).map({x -> [[Bool]] in
                 return enhancements.first(where: {enhancement in
-                    return enhancement == (0..<blockSize).map({(rr: Int) -> [String] in
-                        return (0..<blockSize).map({(cc: Int) -> String in
+                    return enhancement == (0..<blockSize).map({(rr: Int) -> [Bool] in
+                        return (0..<blockSize).map({(cc: Int) -> Bool in
                             return image[i*blockSize+rr][x*blockSize+cc]
                         })
                     })
@@ -76,14 +76,14 @@ func fractalImage(_ input: [String], partTwo: Bool = false) -> Int {
         })
     }
 
-    return image.flatMap({ $0.map({ $0 == "#" ? 1 : 0 }) }).reduce(0, +)
+    return image.flatMap({ $0.map({ $0 ? 1 : 0 }) }).reduce(0, +)
 }
 
 private struct Enhancement {
-    var input: [[String]]
-    var output: [[String]]
+    let input: [[Bool]]
+    let output: [[Bool]]
 
-    static func ==(lhs: Enhancement, rhs: [[String]]) -> Bool {
+    static func ==(lhs: Enhancement, rhs: [[Bool]]) -> Bool {
         return lhs.input == rhs
     }
 }

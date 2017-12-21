@@ -22,7 +22,7 @@ extension Array {
     }
 }
 
-func ==(lhs: [[String]], rhs: [[String]]) -> Bool {
+func ==(lhs: [[Bool]], rhs: [[Bool]]) -> Bool {
     guard lhs.count == rhs.count else { return false }
 
     for i in 0..<lhs.count where lhs[i] != rhs[i] {
