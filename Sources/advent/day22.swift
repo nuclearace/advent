@@ -103,30 +103,24 @@ private class Langton {
         let curState = board[ptCur.x][ptCur.y]
 
         switch curState {
-        case .infected:
-            antDirection = rightTurn[antDirection.rawValue]
-        case .clean:
-            antDirection = leftTurn[antDirection.rawValue]
-        case .flagged:
-            antDirection = antDirection.opposite
-        case .weakened:
-            break
-        }
-
-        switch curState {
         case .clean where partTwo:
+            antDirection = leftTurn[antDirection.rawValue]
             board[ptCur.x][ptCur.y] = .weakened
         case .clean:
             infectedCount += 1
+            antDirection = leftTurn[antDirection.rawValue]
             board[ptCur.x][ptCur.y] = .infected
         case .infected where partTwo:
+            antDirection = rightTurn[antDirection.rawValue]
             board[ptCur.x][ptCur.y] = .flagged
         case .infected:
+            antDirection = rightTurn[antDirection.rawValue]
             board[ptCur.x][ptCur.y] = .clean
         case .weakened:
             infectedCount += 1
             board[ptCur.x][ptCur.y] = .infected
         case .flagged:
+            antDirection = antDirection.opposite
             board[ptCur.x][ptCur.y] = .clean
         }
 
