@@ -90,7 +90,7 @@ private class Langton {
                 case .flagged:
                     print("F", terminator: "")
                 case .infected:
-                    print("#")
+                    print("#", terminator: "")
                 }
             }
 
