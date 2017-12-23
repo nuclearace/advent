@@ -47,7 +47,6 @@ private class Langton {
     private var board: [[CellState]]
     private var antPosition = Point(x: 0, y: 0)
     private var antDirection: Direction!
-    private var stepCount = 0
 
     init(board: [[Bool]], dir: Direction) {
         self.board = Array(repeating: Array(repeating: CellState.clean, count: boardSize), count: boardSize)
@@ -125,8 +124,6 @@ private class Langton {
         }
 
         moveAnt()
-
-        stepCount += 1
     }
 }
 
